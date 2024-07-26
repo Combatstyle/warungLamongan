@@ -95,7 +95,7 @@
                                         <td class="fw-semibold">Subtotal</td>
                                         <td>{{ rupiah($total) }}</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <td class="fw-semibold">Berat Produk</td>
                                         <td>{{ $berat }} Gram</td>
                                     </tr>
@@ -125,12 +125,13 @@
                                     <tr>
                                         <td class="fw-semibold">Estimasi Tiba</td>
                                         <td>{{ $estimasi }} Hari</td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <td class="fw-semibold  border-bottom-0">Total</td>
                                         <td class="text-dark  border-bottom-0"><strong>
                                                 @php
-                                                    $total_bayar = $total + $harga_ongkir;
+                                                    $total_bayar = $total;
+                                                    // + $harga_ongkir;
                                                     echo rupiah($total_bayar);
                                                 @endphp
                                             </strong></td>
@@ -152,7 +153,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">Alamat Pengiriman</h4>
+                                <h4 class="card-title">Alamat Pemesan</h4>
                             </div>
                             <!--end col-->
                         </div>
@@ -298,44 +299,56 @@
                             <div class="card-body">
                                 <div class="text-center align-item-center">
                                     <h4 class="header-title mb-2">Upload Bukti Bayar</h4>
-                                    <img id="output1" src="/dapuranita/default-produk.png" height="200" width="200" alt="" class="rounded">
+                                    <img id="output1" src="/dapuranita/default-produk.png" height="200"
+                                        width="200" alt="" class="rounded">
                                 </div>
                                 <div class="row mt-2">
-                                    <form action="{{ route('customer.pesanan_store') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('customer.pesanan_store') }}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         @method('post')
                                         <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Jenis Transaksi</label>
-                                            <select class="form-select  @error('metode')
+                                            <select
+                                                class="form-select  @error('metode')
                                             is-invalid
-                                            @enderror" name="metode" id="exampleFormControlSelect1">
-                                            <option value="lunas">Lunas [
-                                                Tagihan :
-                                                @php
-                                                    echo rupiah($total_bayar);
-                                                @endphp
-                                                ]</option>
-                                            <option value="dp">DP [
-                                                Tagihan :
-                                                @php
-                                                $dp  = $total_bayar * 0.5;
-                                                echo rupiah($dp);
-                                                @endphp
-                                                ]</option>
+                                            @enderror"
+                                                name="metode" id="exampleFormControlSelect1">
+                                                <option value="lunas">Lunas [
+                                                    Tagihan :
+                                                    @php
+                                                        echo rupiah($total_bayar);
+                                                    @endphp
+                                                    ]</option>
+                                                <option value="dp">DP [
+                                                    Tagihan :
+                                                    @php
+                                                        $dp = $total_bayar * 0.5;
+                                                        echo rupiah($dp);
+                                                    @endphp
+                                                    ]</option>
                                             </select>
                                             @error('metode')
-                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <label for="exampleInputEmail1">Upload Bukti Pembayaran</label>
-                                        <input type="text" name="id_keranjang" value="{{ $keranjang->id_keranjang }}" id="" hidden>
-                                        <input type="text" name="id_user" value="{{ Auth::user()->id }}" id="" hidden>
-                                        <input type="text" name="id_produk" value="{{ $keranjang->id_produk }}" id="" hidden>
-                                        <input type="text" name="quantity" value="{{ $keranjang->quantity }}" id="" hidden>
-                                        <input type="text" name="harga_produk" value="{{ $total }}" id="" hidden>
-                                        <input type="text" name="ongkir" value="{{ $harga_ongkir }}" id="" hidden>
-                                        <input type="text" name="total_bayar" value="{{ $total_bayar  }}" id="" hidden>
-                                        <input type="text" name="dp" value="{{ $dp  }}" id="" hidden>
+                                        <input type="text" name="id_keranjang" value="{{ $keranjang->id_keranjang }}"
+                                            id="" hidden>
+                                        <input type="text" name="id_user" value="{{ Auth::user()->id }}"
+                                            id="" hidden>
+                                        <input type="text" name="id_produk" value="{{ $keranjang->id_produk }}"
+                                            id="" hidden>
+                                        <input type="text" name="quantity" value="{{ $keranjang->quantity }}"
+                                            id="" hidden>
+                                        <input type="text" name="harga_produk" value="{{ $total }}"
+                                            id="" hidden>
+                                        {{-- <input type="text" name="ongkir" value="{{ $harga_ongkir }}" id=""
+                                            hidden> --}}
+                                        <input type="text" name="total_bayar" value="{{ $total_bayar }}"
+                                            id="" hidden>
+                                        <input type="text" name="dp" value="{{ $dp }}" id=""
+                                            hidden>
                                         <input type="file" name="bukti_bayar"
                                             class="form-control mb-2 @error('bukti_bayar')
                                         is-invalid
@@ -344,7 +357,8 @@
                                         @error('bukti_bayar')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
-                                        <button type="submit" class="btn btn-success w-100">Upload Bukti Pembayaraan</button>
+                                        <button type="submit" class="btn btn-success w-100">Upload Bukti
+                                            Pembayaraan</button>
                                     </form>
                                 </div>
                             </div>
@@ -362,12 +376,12 @@
 @endsection
 
 @section('js')
-<script>
-    imgInp1.onchange = evt => {
-        const [file] = imgInp1.files
-        if (file) {
-            output1.src = URL.createObjectURL(file)
-        }
-    };
-</script>
+    <script>
+        imgInp1.onchange = evt => {
+            const [file] = imgInp1.files
+            if (file) {
+                output1.src = URL.createObjectURL(file)
+            }
+        };
+    </script>
 @endsection

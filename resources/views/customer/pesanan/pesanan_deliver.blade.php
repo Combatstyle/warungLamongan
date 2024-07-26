@@ -7,10 +7,10 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col align-self-center">
-                            <h4 class="page-title pb-md-0">Pesanan DiKirim</h4>
+                            <h4 class="page-title pb-md-0">Pesanan Diproses</h4>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Pesanan Dikirim</li>
+                                <li class="breadcrumb-item active">Pesanan Diproses</li>
                             </ol>
                         </div>
                         <!--end col-->
@@ -45,12 +45,12 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Produk</th>
-                                        <th>Ekspedisi</th>
+                                        {{-- <th>Ekspedisi</th> --}}
                                         <th>Quantity</th>
-                                        <th>Pengiriman</th>
+                                        {{-- <th>Pengiriman</th> --}}
                                         <th>invoice</th>
                                         <th>Status</th>
-                                        <th>Tanggal Di Kirim</th>
+                                        <th>Tanggal Di Pesan</th>
                                         <th>Action</th>
                                     </tr>
                                     <!--end tr-->
@@ -72,19 +72,20 @@
                                                     <a href=""
                                                         class="d-inline-block align-middle mb-0 product-name">{{ Str::title($data->nama_produk) }}</a>
                                                     <br>
-                                                    <span class="text-muted font-13">Resi Jne : {{ $data->no_resi }}</span>
+                                                    <span class="text-muted font-13">Kode pengambilan :
+                                                        {{ $data->no_resi }}</span>
                                                 </p>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <img src="/dapuranita/jne.jpeg" alt="" height="40">
-                                            </td>
+                                            </td> --}}
                                             <td>{{ $data->quantity }} / Pcs</td>
-                                            <td>{{ $data->nama_kota . ' [ ' . $data->nama_prov . ' ] ' }}</td>
+                                            {{-- <td>{{ $data->nama_kota . ' [ ' . $data->nama_prov . ' ] ' }}</td> --}}
                                             <td><a href="{{ route('customer.pesanan_invoice', $data->id_pesanan) }}"
                                                     target="_blank" class="btn btn-sm btn-secondary"><i
                                                         class="ti ti-file-invoice"> Invoice</i></a></td>
                                             <td>
-                                                <span class="badge bg-success">Dalam Pengiriman</span>
+                                                <span class="badge bg-success">Dalam Proses</span>
                                             </td>
                                             <td>
                                                 @php
@@ -93,27 +94,24 @@
                                                 @endphp
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-success"  data-bs-toggle="modal"
+                                                <a href="" class="btn btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#komentar-{{ $data->id_pesanan }}">Terima Pesanan</a>
                                             </td>
-                                            <div id="komentar-{{ $data->id_pesanan }}" class="modal fade"
-                                                tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                aria-hidden="true">
+                                            <div id="komentar-{{ $data->id_pesanan }}" class="modal fade" tabindex="-1"
+                                                role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
-                                                            <form action="{{ route('customer.pesanan_diterima', $data->id_pesanan) }}"
+                                                            <form
+                                                                action="{{ route('customer.pesanan_diterima', $data->id_pesanan) }}"
                                                                 method="post">
                                                                 @csrf
-                                                                <input type="text" name="id_pesanan"
-                                                                    id=""
+                                                                <input type="text" name="id_pesanan" id=""
                                                                     value="{{ $data->id_pesanan }}" hidden>
-                                                                <input type="text" name="id_produk"
-                                                                    id=""
+                                                                <input type="text" name="id_produk" id=""
                                                                     value="{{ $data->id_produk }}" hidden>
-                                                                <input type="text" name="id_user"
-                                                                    id="" value="{{ Auth::user()->id }}"
-                                                                    hidden>
+                                                                <input type="text" name="id_user" id=""
+                                                                    value="{{ Auth::user()->id }}" hidden>
                                                                 <div class="row">
                                                                     <div class="col-xl-12 mb-2">
                                                                         <label for="">Komentar

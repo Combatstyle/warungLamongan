@@ -46,7 +46,7 @@
                                         <th>ID</th>
                                         <th>Produk</th>
                                         <th>Quantity</th>
-                                        <th>Pengiriman</th>
+                                        {{-- <th>Pengiriman</th> --}}
                                         <th>invoice</th>
                                         <th>Status</th>
                                         <th>Tanggal Order</th>
@@ -68,12 +68,12 @@
                                                     class="thumb-sm rounded-circle me-2">
                                                 {{ Str::title($data->nama_produk) }}</td>
                                             <td>{{ $data->quantity }} / Pcs</td>
-                                            <td>{{ $data->nama_kota . ' [ ' . $data->nama_prov . ' ] ' }}</td>
+                                            {{-- <td>{{ $data->nama_kota . ' [ ' . $data->nama_prov . ' ] ' }}</td> --}}
                                             <td><a href="{{ route('admin.pesanan_invoice', $data->id_pesanan) }}"
                                                     target="_blank" class="btn btn-sm btn-secondary"><i
                                                         class="ti ti-file-invoice"> Invoice</i></a></td>
                                             <td>
-                                               <span class="badge bg-success">Dalam Pengiriman</span>
+                                                <span class="badge bg-success">Dalam Proses</span>
                                             </td>
                                             <td>
                                                 @php
@@ -81,7 +81,7 @@
                                                     echo $date;
                                                 @endphp
                                             </td>
-                                            </tr>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

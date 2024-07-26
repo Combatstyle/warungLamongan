@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('id_user');
             $table->integer('quantity');
             $table->integer('harga_total_bayar');
-            $table->integer('ongkir');
-            $table->integer('total_ongkir');
+            $table->integer('ongkir')->nullable();
+            $table->integer('total_ongkir')->nullable();
             $table->text('bukti_bayar')->nullable();
             $table->bigInteger('total_dp')->nullable();
             $table->text('bukti_bayar_dp')->nullable();

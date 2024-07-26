@@ -47,7 +47,7 @@
                                         <th>Produk</th>
                                         <th>Quantity</th>
                                         <th>Total Tagihan</th>
-                                        <th>Pengiriman</th>
+                                        {{-- <th>Pengiriman</th> --}}
                                         <th>Tipe</th>
                                         <th>Status</th>
                                         <th>Cek Bukti</th>
@@ -72,8 +72,10 @@
                                                 {{ Str::title($data->nama_produk) }}</td>
                                             <td>{{ $data->quantity }} / Pcs</td>
                                             <td>{{ rupiah($data->total_ongkir) }}</td>
-                                            <td>{{ $data->nama_kota . ' [ ' . $data->nama_prov . ' ] ' }}</td>
-                                            <td><span class="badge badge-soft-primary p-2">{{ Str::upper($data->tipe_pembayaran) }}</span></td>
+                                            {{-- <td>{{ $data->nama_kota . ' [ ' . $data->nama_prov . ' ] ' }}</td> --}}
+                                            <td><span
+                                                    class="badge badge-soft-primary p-2">{{ Str::upper($data->tipe_pembayaran) }}</span>
+                                            </td>
                                             <td>
                                                 <span class="badge badge-soft-success p-2">Telah Upload Bukti
                                                     Pembayaran</span>
@@ -84,9 +86,13 @@
                                                     Pembayaran</button>
                                             </td>
                                             <td>
-                                                <a href="{{ route ('admin.pesanan_terima', $data->id_pesanan) }}" style="color:green" onclick="return confirm('Apakah Yakin Pembayaran Telah Sesuai ?');"><i class="ti ti-checks"></i>Terima</a>
+                                                <a href="{{ route('admin.pesanan_terima', $data->id_pesanan) }}"
+                                                    style="color:green"
+                                                    onclick="return confirm('Apakah Yakin Pembayaran Telah Sesuai ?');"><i
+                                                        class="ti ti-checks"></i>Terima</a>
                                                 |
-                                                <a href="{{ route ('admin.pesanan_tolak', $data->id_pesanan) }}" style="color:red"><i class="ti ti-circle-x"></i>Tolak</a>
+                                                <a href="{{ route('admin.pesanan_tolak', $data->id_pesanan) }}"
+                                                    style="color:red"><i class="ti ti-circle-x"></i>Tolak</a>
                                             </td>
                                             <td>
                                                 @php
@@ -109,21 +115,25 @@
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <div class="col-lg-3 text-center align-self-center">
-                                                                    @if ($data->tipe_pembayaran=="dp")
-                                                                    <img src="/bukti_bayar/{{ $data->bukti_bayar_dp }}"
-                                                                        alt="" class="img-fluid" data-action="zoom">
+                                                                    @if ($data->tipe_pembayaran == 'dp')
+                                                                        <img src="/bukti_bayar/{{ $data->bukti_bayar_dp }}"
+                                                                            alt="" class="img-fluid"
+                                                                            data-action="zoom">
                                                                     @else
-                                                                    <img src="/bukti_bayar/{{ $data->bukti_bayar }}"
-                                                                        alt="" class="img-fluid" data-action="zoom">
+                                                                        <img src="/bukti_bayar/{{ $data->bukti_bayar }}"
+                                                                            alt="" class="img-fluid"
+                                                                            data-action="zoom">
                                                                     @endif
                                                                 </div>
                                                                 <!--end col-->
                                                                 <div class="col-lg-9">
                                                                     <h5>#PP00{{ $data->id_pesanan }}</h5>
-                                                                    @if ($data->tipe_pembayaran=="dp")
-                                                                    <h5>Total Tagihan : {{ rupiah($data->total_dp) }}</h5>
+                                                                    @if ($data->tipe_pembayaran == 'dp')
+                                                                        <h5>Total Tagihan : {{ rupiah($data->total_dp) }}
+                                                                        </h5>
                                                                     @else
-                                                                    <h5>Total Tagihan : {{ rupiah($data->total_ongkir) }}</h5>
+                                                                        <h5>Total Tagihan :
+                                                                            {{ rupiah($data->total_ongkir) }}</h5>
                                                                     @endif
                                                                     <span class="badge bg-soft-secondary">Klik Gambar Untuk
                                                                         Zoom</span>
