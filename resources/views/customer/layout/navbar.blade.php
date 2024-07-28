@@ -302,7 +302,7 @@
                     </li>
                     <li>
                         <a href="{{ route('customer.pesanan_deliver') }}" class="dropdown-item">
-                            Pengiriman
+                            Siap Diambil
                             @if ($notif_onroad->count() > 0)
                                 <span class="badge bg-danger">{{ $notif_onroad->count() }}</span>
                             @endif
