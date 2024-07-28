@@ -85,7 +85,7 @@
                                                     target="_blank" class="btn btn-sm btn-secondary"><i
                                                         class="ti ti-file-invoice"> Invoice</i></a></td>
                                             <td>
-                                                <span class="badge bg-success">Dalam Proses</span>
+                                                <span class="badge bg-success">Siap Diambil</span>
                                             </td>
                                             <td>
                                                 @php
