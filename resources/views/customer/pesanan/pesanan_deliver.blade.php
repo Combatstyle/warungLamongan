@@ -7,10 +7,10 @@
                 <div class="page-title-box">
                     <div class="row">
                         <div class="col align-self-center">
-                            <h4 class="page-title pb-md-0">Pesanan Diproses</h4>
+                            <h4 class="page-title pb-md-0">Pesanan Siap Diambil</h4>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Pesanan Diproses</li>
+                                <li class="breadcrumb-item active">Pesanan Siap Diambil</li>
                             </ol>
                         </div>
                         <!--end col-->
@@ -85,7 +85,7 @@
                                                     target="_blank" class="btn btn-sm btn-secondary"><i
                                                         class="ti ti-file-invoice"> Invoice</i></a></td>
                                             <td>
-                                                <span class="badge bg-success">Dalam Proses</span>
+                                                <span class="badge bg-success">Siap Diambil</span>
                                             </td>
                                             <td>
                                                 @php

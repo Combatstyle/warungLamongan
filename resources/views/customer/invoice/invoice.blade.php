@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('customer.layout.master')
 
 @section('content')
     <div class="container-fluid">
@@ -40,7 +40,8 @@
                     <div class="card-body invoice-head">
                         <div class="row">
                             <div class="col-md-4 align-self-center">
-                                <img src="/dapuranita/logo1.png" alt="logo-small" class="logo-sm me-1" height="40">
+                                <img src="/dapuranita/logoLamongan.png" alt="logo-small" class="logo-sm me-1"
+                                    height="40">
                                 <img src="assets/images/logo.png" alt="logo-large" class="logo-lg brand-light"
                                     height="16">
                                 <p class="mt-2 mb-0 text-muted">Invoice Pesanan Kode #PP00{{ $pesanan->id_pesanan }}</p>
@@ -52,19 +53,19 @@
                                     <li class="list-inline-item">
                                         <div class="ps-3">
                                             <i class="mdi mdi-web"></i>
-                                            <p class="text-muted mb-0">www.Dapur-Anita.com</p>
+                                            <p class="text-muted mb-0">caklutfi.com</p>
                                         </div>
                                     </li>
                                     <li class="list-inline-item">
                                         <div class="ps-3">
                                             <i class="mdi mdi-phone"></i>
-                                            <p class="text-muted mb-0">0857-4059-0305</p>
+                                            <p class="text-muted mb-0">0856-0015-3111</p>
                                         </div>
                                     </li>
                                     <li class="list-inline-item">
                                         <div class="ps-3">
                                             <i class="mdi mdi-map-marker"></i>
-                                            <p class="text-muted mb-0">51372 Kendal, Indonesia</p>
+                                            <p class="text-muted mb-0">50197 Semarang, Indonesia</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -78,7 +79,8 @@
                         <div class="row row-cols-3 d-flex justify-content-md-between">
                             <div class="col-md-3 d-print-flex">
                                 <div class="">
-                                    <h6 class="mb-0"><b>Order Date :</b> {{ date('d/M/Y', strtotime($pesanan->updated_at)) }}</h6>
+                                    <h6 class="mb-0"><b>Order Date :</b>
+                                        {{ date('d/M/Y', strtotime($pesanan->updated_at)) }}</h6>
                                     <h6><b>Order ID :</b> # 00{{ $pesanan->id_pesanan }}</h6>
                                 </div>
                             </div>
@@ -86,10 +88,10 @@
                             <div class="col-md-3 d-print-flex">
                                 <div class="">
                                     <address class="font-13">
-                                        <strong class="font-14">Tertuju Untuk :</strong><br>
+                                        <strong class="font-14">Pembeli :</strong><br>
                                         {{ Str::title($pesanan->nama_penerima) }}<br>
                                         {{ $pesanan->alamat_lengkap }}<br>
-                                        {{ $pesanan->nama_kota.', '.$pesanan->nama_prov }}<br>
+                                        {{ $pesanan->nama_kota . ', ' . $pesanan->nama_prov }}<br>
                                         <abbr title="Phone">No Telp:</abbr> {{ $pesanan->no_telp }}
                                     </address>
                                 </div>
@@ -98,12 +100,12 @@
                             <div class="col-md-3 d-print-flex">
                                 <div class="">
                                     <address class="font-13">
-                                        <strong class="font-14">Pengirim :</strong><br>
-                                        Dapur Anita<br>
-                                        Perumahan Griya Mutiara Prima No. C3<br>
-                                        Ds. Mororejo, RT.01/RW.02
-                                        Kec. Kaliwungu Kab.Kendal, Jawa Tengah<br>
-                                        <abbr title="Phone">No. Telp:</abbr> 0857-4059-0305
+                                        <strong class="font-14">Penjual :</strong><br>
+                                        Warung Lamongan Cak Lutfi<br>
+                                        Jalan Karang Ingas No. 43<br>
+                                        Kel. Muktiharjo Kidul,
+                                        Kec. Pedurungan Kota Semarang, Jawa Tengah<br>
+                                        <abbr title="Phone">No. Telp:</abbr> 0856-0015-3111
                                     </address>
                                 </div>
                             </div>
@@ -125,16 +127,17 @@
                                             <!--end tr-->
                                         </thead>
                                         @php
-                                        function rupiah($angka)
-                                        {
-                                            $hasil_rupiah = 'Rp ' . number_format($angka, 2, ',', '.');
-                                            return $hasil_rupiah;
-                                        }
-                                         @endphp
+                                            function rupiah($angka)
+                                            {
+                                                $hasil_rupiah = 'Rp ' . number_format($angka, 2, ',', '.');
+                                                return $hasil_rupiah;
+                                            }
+                                        @endphp
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <h5 class="mt-0 mb-1 font-14">{{ Str::title($pesanan->nama_produk) }}</h5>
+                                                    <h5 class="mt-0 mb-1 font-14">{{ Str::title($pesanan->nama_produk) }}
+                                                    </h5>
                                                 </td>
                                                 <td>{{ $pesanan->quantity }}</td>
                                                 <td>
@@ -142,10 +145,10 @@
                                                         $harga = $pesanan->harga_total_bayar / $pesanan->quantity;
                                                         echo rupiah($harga);
                                                     @endphp
-                                                    </td>
+                                                </td>
                                                 <td>{{ rupiah($pesanan->harga_total_bayar) }}</td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td colspan="2" class="border-0"></td>
                                                 <td class="border-0 font-14 text-dark"><b>Berat Total : {{ $pesanan->quantity * $pesanan->berat.' Gram' }}</b></td>
                                                 <td class="border-0 font-14 text-dark"><b>-</b></td>
@@ -154,11 +157,13 @@
                                                 <td colspan="2" class="border-0"></td>
                                                 <td class="border-0 font-14 text-dark"><b>Ongkir : {{ $pesanan->nama_kota }}</b></td>
                                                 <td class="border-0 font-14 text-dark"><b>{{ rupiah($pesanan->ongkir) }}</b></td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr class="bg-black text-white">
                                                 <th colspan="2" class="border-0"></th>
                                                 <td class="border-0 font-14"><b>Total</b></td>
-                                                <td class="border-0 font-14"><b>{{ rupiah($pesanan->total_ongkir) }}</b></td>
+                                                <td class="border-0 font-14">
+                                                    <b>{{ rupiah($pesanan->harga_total_bayar) }}</b>
+                                                </td>
                                             </tr>
                                             <!--end tr-->
                                         </tbody>
@@ -177,9 +182,8 @@
                             <!--end col-->
                             <div class="col-lg-6 align-self-center">
                                 <div class="float-none float-md-end" style="width: 30%;">
-                                    <small>Dapur Anita</small>
-                                    <img src="/dapuranita/logo1.png" alt="" class="mt-2 mb-1"
-                                        height="20">
+                                    <small>Warung Lamongan Cak Lutfi</small>
+                                    <img src="/dapuranita/logoLamongan.png" alt="" class="mt-2 mb-1" height="20">
                                 </div>
                             </div>
                             <!--end col-->
@@ -188,7 +192,8 @@
                         <hr>
                         <div class="row d-flex justify-content-center">
                             <div class="col-lg-12 col-xl-4 ms-auto align-self-center">
-                                <div class="text-center"><small class="font-12">Terima Kasih Atas Kepercayaaan Terhadap Produk Kami</small></div>
+                                <div class="text-center"><small class="font-12">Terima Kasih Atas Kepercayaaan Terhadap
+                                        Produk Kami</small></div>
                             </div>
                             <!--end col-->
                             <div class="col-lg-12 col-xl-4">
